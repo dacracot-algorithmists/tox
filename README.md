@@ -14,10 +14,14 @@ itself, tox provides the foundation for more complex applications to be built.
 Version
 -------
 
-This is version 2.6 of tox.
+This is version 2.7beta of tox.
 
 Change History
 --------------
+  
+Version 2.7:
+
+1. Something like this... https://www.youtube.com/watch?v=r7Yv4O4wAwI
   
 Version 2.6:
 
