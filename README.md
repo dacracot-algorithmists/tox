@@ -22,6 +22,10 @@ Change History
 Version 2.7:
 
 1. Something like this... https://www.youtube.com/watch?v=r7Yv4O4wAwI
+
+Version 2.6.1:
+
+1. Returning proper HTTP status code for PL/SQL failures.
   
 Version 2.6:
 
