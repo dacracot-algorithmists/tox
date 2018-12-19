@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>tox-js</title>
+</head>
+<body>
+	<script>
+	//
+	// -----------------------------------------------
+	//
+	class Tox extends HTMLElement
+		{
+		constructor(cnt)
+			{
+			let word = ['zero','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten '];
+			super();
+			if (cnt > 11) cnt = 11;
+			for (let i=0; i<cnt; i++)
+				{
+				let t = document.createElement('data');
+				t.setAttribute('key',i);
+				t.setAttribute('word',word[i]);
+				this.appendChild(t);
+				}
+			}
+		}
+	//
+	customElements.define('tox-js',Tox);
+	document.body.appendChild(new Tox(8));
+	//
+	// -----------------------------------------------
+	//
+	var xpe = new XPathEvaluator();
+	//
+	var txt = xpe.evaluate("//tox-js/data[@key='2']/@word",document,null,XPathResult.STRING_TYPE,null);
+	console.log("//tox-js/data[@key='2']/@word = "+txt.stringValue);
+	//
+	// -----------------------------------------------
+	//
+	</script>
+</body>
+</html>
