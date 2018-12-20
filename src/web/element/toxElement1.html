@@ -8,7 +8,7 @@
 	<script>
 	//
 	// -----------------------------------------------
-	//
+	// out new element and its methods
 	class Tox extends HTMLElement
 		{
 		constructor(cnt)
@@ -26,14 +26,24 @@
 			}
 		}
 	//
+	// -----------------------------------------------
+	// register our element with the DOM
 	customElements.define('tox-js',Tox);
+	//
+	// -----------------------------------------------
+	// create an instance and add it to the body
 	document.body.appendChild(new Tox(8));
 	//
 	// -----------------------------------------------
-	//
+	// instantiate an xpath tool
 	var xpe = new XPathEvaluator();
 	//
+	// -----------------------------------------------
+	// use xpath to pluck a string value from the DOM
 	var txt = xpe.evaluate("//tox-js/data[@key='2']/@word",document,null,XPathResult.STRING_TYPE,null);
+	//
+	// -----------------------------------------------
+	// show what we found
 	console.log("//tox-js/data[@key='2']/@word = "+txt.stringValue);
 	//
 	// -----------------------------------------------
