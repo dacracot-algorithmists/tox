@@ -125,7 +125,7 @@
 	<!-- =================================================================== -->
 	<!-- load war -->
 	<!-- =================================================================== -->
-	<target name="load.war" depends="clean, compile.java" description="move everything to the web archive">
+	<target name="load.war" depends="clean, compile.java" description="move everything to the tox web archive">
 		<echo message="load.war -----------------------------------"/>
 		<mkdir dir="tmp/tox"/>
 		<copy todir="tmp/tox/META-INF">
@@ -164,6 +164,22 @@
 			<fileset dir="tmp/tox"/>
 		</war>
 		<echo message="load.war -----------------------------------"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- load test -->
+	<!-- =================================================================== -->
+	<target name="load.test" depends="clean" description="move everything to the test web archive">
+		<echo message="load.test ----------------------------------"/>
+		<mkdir dir="tmp/test"/>
+		<copy todir="tmp/test/element">
+			<fileset dir="src/web/element">
+				<include name="toxElement*.html"/>
+			</fileset>
+		</copy>
+		<war warfile="test.war" needxmlfile="false">
+			<fileset dir="tmp/test"/>
+		</war>
+		<echo message="load.test ----------------------------------"/>
 	</target>
 	<!-- =================================================================== -->
 	<!-- default -->

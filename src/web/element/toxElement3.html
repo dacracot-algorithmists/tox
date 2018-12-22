@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>tox-js</title>
+</head>
+<body>
+	<script>
+	//
+	// -----------------------------------------------
+	// out new element and its methods
+	class Tox extends HTMLElement
+		{
+		constructor()
+			{
+			fetch('http://localhost:8080/tox/example.test.formatted?in_mask=YYYYMMDD')
+				.then(function(response)
+					{
+					console.log("status => "+response.status);
+					return response.text();
+					})
+				.then(function(text)
+					{ 
+					console.log(text); 
+					});
+			}
+		}
+	//
+	// -----------------------------------------------
+	// register our element with the DOM
+	customElements.define('tox-js',Tox);
+	//
+	// -----------------------------------------------
+	// create an instance and add it to the body
+	document.body.appendChild(new Tox());
+	//
+	// -----------------------------------------------
+	// instantiate an xpath tool
+	var xpe = new XPathEvaluator();
+	//
+	// -----------------------------------------------
+	// use xpath to pluck a string value from the DOM
+	var iterator = xpe.evaluate("//tox-js/data[2 <= position() and position() <= 4]/@word",document,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);
+	//
+	// -----------------------------------------------
+	// show what we found
+	var i = iterator.iterateNext();
+	while (i)
+		{
+		console.log("//tox-js/data[2 <= position() and position() <= 4]/@word = "+i.textContent);
+		i = iterator.iterateNext();
+		}
+	//
+	// -----------------------------------------------
+	//
+	</script>
+</body>
+</html>

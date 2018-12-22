@@ -34,9 +34,6 @@ case "$1" in
 			echo -----------------------------
 			cp -v tox.war "$WEBAPPS"
 			"$TOMCAT_HOME/bin/startup.sh"
-			sleep 2
-			echo -----------------------------
-			unitTest
 			echo -----------------------------
 			say "success"
 		else
