@@ -13,15 +13,26 @@
 		{
 		constructor()
 			{
+			super();
 			fetch('http://localhost:8080/tox/example.test.formatted?in_mask=YYYYMMDD')
-				.then(function(response)
+				.then((response)=>
 					{
-					console.log("status => "+response.status);
+					console.log("status: "+response.status);
 					return response.text();
 					})
-				.then(function(text)
-					{ 
-					console.log(text); 
+				.then((text)=>
+					{
+					console.log("text: "+text);
+					try
+						{
+						var dp = new DOMParser();
+						var xmlDOM = dp.parseFromString(text, "text/xml");
+						this.appendChild(xmlDOM.documentElement);
+						}
+					catch(err)
+						{
+						console.log("err: "+err.message);
+						}
 					});
 			}
 		}
@@ -40,16 +51,11 @@
 	//
 	// -----------------------------------------------
 	// use xpath to pluck a string value from the DOM
-	var iterator = xpe.evaluate("//tox-js/data[2 <= position() and position() <= 4]/@word",document,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);
+	var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
 	//
 	// -----------------------------------------------
 	// show what we found
-	var i = iterator.iterateNext();
-	while (i)
-		{
-		console.log("//tox-js/data[2 <= position() and position() <= 4]/@word = "+i.textContent);
-		i = iterator.iterateNext();
-		}
+	console.log("//tox-js/example/@timestamp = "+txt.stringValue);
 	//
 	// -----------------------------------------------
 	//

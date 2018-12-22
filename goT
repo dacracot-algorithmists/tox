@@ -23,6 +23,7 @@ case "$1" in
 		echo -----------------------------
 		;;
 	*)
+		osascript -e 'quit app "Firefox"'
 		ant load.test
 		if [ $? = 0 ] ; then
 			echo -----------------------------
