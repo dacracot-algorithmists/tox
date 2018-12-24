@@ -8,13 +8,13 @@
 	<script>
 	//
 	// -----------------------------------------------
-	// out new element and its methods
+	// tox element
 	class Tox extends HTMLElement
 		{
-		constructor()
+		constructor(url)
 			{
 			super();
-			fetch('http://localhost:8080/tox/example.test.formatted?in_mask=YYYYMMDD')
+			fetch(url)
 				.then((response)=>
 					{
 					console.log("status: "+response.status);
@@ -28,12 +28,26 @@
 						var dp = new DOMParser();
 						var xmlDOM = dp.parseFromString(text, "text/xml");
 						this.appendChild(xmlDOM.documentElement);
+						return true;
 						}
 					catch(err)
 						{
 						console.log("err: "+err.message);
+						return false;
 						}
-					});
+					})
+				.then((ok)=>
+					{
+					if (ok)
+						{
+						var xpe = new XPathEvaluator();
+						var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
+						console.log("//tox-js/example/@timestamp = "+txt.stringValue);
+						}
+					else
+						console.log("not ok");
+					}
+					);
 			}
 		}
 	//
@@ -43,20 +57,7 @@
 	//
 	// -----------------------------------------------
 	// create an instance and add it to the body
-	document.body.appendChild(new Tox());
-	//
-	// -----------------------------------------------
-	// instantiate an xpath tool
-	var xpe = new XPathEvaluator();
-	//
-	// -----------------------------------------------
-	// use xpath to pluck a string value from the DOM
-	var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
-	//
-	// -----------------------------------------------
-	// show what we found
-	console.log("//tox-js/example/@timestamp = "+txt.stringValue);
-	//
+	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.formatted?in_mask=YYYYMMDD'));
 	// -----------------------------------------------
 	//
 	</script>
