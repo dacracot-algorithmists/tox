@@ -25,9 +25,7 @@
 					console.log("text: "+text);
 					try
 						{
-						var dp = new DOMParser();
-						var xmlDOM = dp.parseFromString(text, "text/xml");
-						this.appendChild(xmlDOM.documentElement);
+						this.insertAdjacentHTML('afterbegin', text);
 						return true;
 						}
 					catch(err)
