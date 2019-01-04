@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>tox-js</title>
+	<title>tox Custom Elements</title>
 </head>
 <body>
 	<script>
@@ -41,10 +41,10 @@
 						try
 							{
 							var xpe = new XPathEvaluator();
-							var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
-							console.log("//tox-js/example/@timestamp: "+txt.stringValue);
-							txt = xpe.evaluate("//tox-js/example/@feedback",document,null,XPathResult.STRING_TYPE,null);
-							console.log("//tox-js/example/@feedback: "+txt.stringValue);
+							var txt = xpe.evaluate("//tox-simple/table/@timestamp",document,null,XPathResult.STRING_TYPE,null);
+							console.log("//tox-simple/table/@timestamp: "+txt.stringValue);
+							txt = xpe.evaluate("//tox-simple/table/@feedback",document,null,XPathResult.STRING_TYPE,null);
+							console.log("//tox-simple/table/@feedback: "+txt.stringValue);
 							}
 						catch(err)
 							{
@@ -53,18 +53,17 @@
 						}
 					else
 						console.log("not ok");
-					}
-					);
+					});
 			}
 		}
 	//
 	// -----------------------------------------------
 	// register our element with the DOM
-	customElements.define('tox-js',Tox);
+	customElements.define('tox-simple',Tox);
 	//
 	// -----------------------------------------------
 	// create an instance and add it to the body
-	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.formatted?in_mask=YYYYMMDD'));
+	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.testXml?in_root=table'));
 	// -----------------------------------------------
 	//
 	</script>

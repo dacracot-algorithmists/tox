@@ -63,7 +63,7 @@
 	<!-- =================================================================== -->
 	<!-- load plsql example -->
 	<!-- =================================================================== -->
-	<target name="compile.plsql.example" description="compile plsql">
+	<target name="compile.plsql.example" description="compile plsql for example">
 		<echo message="compile.plsql.example ----------------"/>
 		<mkdir dir="tmp/log"/>
 		<exec dir="src/sql" executable="sql" failonerror="true" output="src/sql/test.all.sql.err">
@@ -168,7 +168,7 @@
 	<!-- =================================================================== -->
 	<!-- load test -->
 	<!-- =================================================================== -->
-	<target name="load.test" depends="clean" description="move everything to the test web archive">
+	<target name="load.test" depends="clean, compile.plsql.example" description="move everything to the test web archive">
 		<echo message="load.test ----------------------------------"/>
 		<mkdir dir="tmp/test"/>
 		<copy todir="tmp/test/element">
@@ -184,7 +184,7 @@
 	<!-- =================================================================== -->
 	<!-- default -->
 	<!-- =================================================================== -->
-	<target name="main" depends="clean, compile.plsql, load.war" description="default">
+	<target name="main" depends="clean, compile.plsql.tox, load.war" description="default">
 	</target>
 	<!-- =================================================================== -->
 </project>
