@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>tox Custom Elements</title>
+</head>
+<body>
+	<script>
+	//
+	// -----------------------------------------------
+	// tox element
+	class Tox extends HTMLElement
+		{
+		constructor(url)
+			{
+			super();
+			fetch(url)
+				.then((response)=>
+					{
+					if (response.status == 200)
+						{
+						return response.text();
+						}
+					else
+						{
+						return("<output feedback=\"response.status:"+response.status+"\"/>");
+						}
+					})
+				.then((text)=>
+					{
+					try
+						{
+						let dp = new DOMParser();
+						let xmlDOM = dp.parseFromString(text, "text/xml");
+						let xpe = new XPathEvaluator();
+						let txt = xpe.evaluate("//output/@feedback",xmlDOM,null,XPathResult.STRING_TYPE,null);
+						if (txt.stringValue == "ok")
+							{
+							let output = xmlDOM.getElementsByTagName('output');
+							this.appendChild(output[0]);
+							return true;
+							}
+						else
+							{
+							console.log("//output/@feedback: "+txt.stringValue);
+							return false;
+							}
+						}
+					catch(err)
+						{
+						console.log("err: "+err.message);
+						return false;
+						}
+					})
+				.then((ok)=>
+					{
+					if (ok)
+						console.log("ok");
+					else
+						console.log("not ok");
+					});
+			}
+		}
+	//
+	// -----------------------------------------------
+	// register our element with the DOM
+	customElements.define('tox-simple',Tox);
+	//
+	// -----------------------------------------------
+	// create an instance and add it to the body
+	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.testXml?in_root=output'));
+	// -----------------------------------------------
+	//
+	</script>
+</body>
+</html>
