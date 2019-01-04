@@ -40,9 +40,18 @@
 					{
 					if (ok)
 						{
-						var xpe = new XPathEvaluator();
-						var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
-						console.log("//tox-js/example/@timestamp: "+txt.stringValue);
+						try
+							{
+							var xpe = new XPathEvaluator();
+							var txt = xpe.evaluate("//tox-js/example/@timestamp",document,null,XPathResult.STRING_TYPE,null);
+							console.log("//tox-js/example/@timestamp: "+txt.stringValue);
+							txt = xpe.evaluate("//tox-js/example/@feedback",document,null,XPathResult.STRING_TYPE,null);
+							console.log("//tox-js/example/@feedback: "+txt.stringValue);
+							}
+						catch(err)
+							{
+							console.log("err: "+err.message);
+							}
 						}
 					else
 						console.log("not ok");
