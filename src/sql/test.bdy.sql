@@ -186,10 +186,10 @@ CREATE OR REPLACE PACKAGE BODY test
 				EXIT WHEN (c_testing%NOTFOUND);
 --
 -- parser does not like this
--- 				tox.tox.into_spool('<testing key="'||v_testing.key||'" txt="'||v_testing.txt||'" seq="'||v_testing.seq||'" />');
+ 				tox.tox.into_spool('<testing key="'||v_testing.key||'" txt="'||v_testing.txt||'" seq="'||v_testing.seq||'" />');
 --
 -- better, but not inside root
-				tox.tox.into_spool('<testing key="'||v_testing.key||'" txt="'||v_testing.txt||'" seq="'||v_testing.seq||'"></testing>');
+--				tox.tox.into_spool('<testing key="'||v_testing.key||'" txt="'||v_testing.txt||'" seq="'||v_testing.seq||'"></testing>');
 			END LOOP;
 			CLOSE c_testing;
 			tox.tox.into_spool('</'||in_root||'>');

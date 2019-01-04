@@ -17,42 +17,40 @@
 			fetch(url)
 				.then((response)=>
 					{
-					console.log("status: "+response.status);
-					return response.text();
+					if (response.status == 200)
+						{
+						return response.text();
+						}
+					else
+						{
+						return("<output feedback=\"response.status:"+response.status+"\"/>");
+						}
 					})
 				.then((text)=>
 					{
-					console.log("text: "+text);
 					try
 						{
-						this.insertAdjacentHTML('afterbegin', text);
-						return true;
+						let dp = new DOMParser();
+						let xmlDOM = dp.parseFromString(text, "text/xml");
+						let xpe = new XPathEvaluator();
+						let txt = xpe.evaluate("//output/@feedback",xmlDOM,null,XPathResult.STRING_TYPE,null);
+						if (txt.stringValue == "ok")
+							{
+							let output = xmlDOM.getElementsByTagName('output');
+							this.appendChild(output[0]);
+							return true;
+							}
+						else
+							{
+							console.log("//output/@feedback: "+txt.stringValue);
+							return false;
+							}
 						}
 					catch(err)
 						{
 						console.log("err: "+err.message);
 						return false;
 						}
-					})
-				.then((ok)=>
-					{
-					if (ok)
-						{
-						try
-							{
-							var xpe = new XPathEvaluator();
-							var txt = xpe.evaluate("//tox-simple/table/@timestamp",document,null,XPathResult.STRING_TYPE,null);
-							console.log("//tox-simple/table/@timestamp: "+txt.stringValue);
-							txt = xpe.evaluate("//tox-simple/table/@feedback",document,null,XPathResult.STRING_TYPE,null);
-							console.log("//tox-simple/table/@feedback: "+txt.stringValue);
-							}
-						catch(err)
-							{
-							console.log("err: "+err.message);
-							}
-						}
-					else
-						console.log("not ok");
 					});
 			}
 		}
@@ -63,7 +61,7 @@
 	//
 	// -----------------------------------------------
 	// create an instance and add it to the body
-	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.testXml?in_root=table'));
+	document.body.appendChild(new Tox('http://localhost:8080/tox/example.test.testXml?in_root=output'));
 	// -----------------------------------------------
 	//
 	</script>
