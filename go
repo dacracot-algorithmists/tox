@@ -22,6 +22,13 @@ case "$1" in
 		echo "       compile and deploy tox"
 		echo -----------------------------
 		;;
+	'bounce')
+		echo -----------------------------
+		"$TOMCAT_HOME/bin/shutdown.sh"
+		"$TOMCAT_HOME/bin/startup.sh"
+		echo -----------------------------
+		say "bounced"
+		;;
 	*)
 		ant
 		if [ $? = 0 ] ; then
