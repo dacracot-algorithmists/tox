@@ -176,6 +176,9 @@
 				<include name="toxElement*.html"/>
 			</fileset>
 		</copy>
+		<copy todir="tmp/test/table">
+			<fileset dir="src/web/table"/>
+		</copy>
 		<war warfile="test.war" needxmlfile="false">
 			<fileset dir="tmp/test"/>
 		</war>

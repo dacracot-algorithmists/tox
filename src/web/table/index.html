@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5 Editable Table</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div id="table" class="table-editable">
+			<table class="table">
+				<!-- cloned when add is clicked -->
+				<tr class="hide">
+					<td contenteditable="true">&lt;name&gt;</td>
+					<td contenteditable="true">&lt;value&gt;</td>
+					<td>
+						<img class="table-remove" alt="Remove this table row." src="svg/minus-square.svg" height="20px" width="20px">
+					</td>
+					<td>
+						<img class="table-up" alt="Move this table row up." src="svg/arrow-up.svg" height="20px" width="20px">
+						<img class="table-down" alt="Move this table row down." src="svg/arrow-down.svg" height="20px" width="20px">
+					</td>
+				</tr>
+				<!-- cloned when add is clicked -->
+				<tr>
+					<th>Name</th>
+					<th>Value</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr>
+					<td contenteditable="true">One</td>
+					<td contenteditable="true">1</td>
+					<td>
+						<img class="table-remove" alt="Remove this table row." src="svg/minus-square.svg" height="20px" width="20px">
+					</td>
+					<td>
+						<img class="table-up" alt="Move this table row up." src="svg/arrow-up.svg" height="20px" width="20px">
+						<img class="table-down" alt="Move this table row down." src="svg/arrow-down.svg" height="20px" width="20px">
+					</td>
+				</tr>
+				<tr>
+					<td contenteditable="true">Two</td>
+					<td contenteditable="true">2</td>
+					<td>
+						<img class="table-remove" alt="Remove this table row." src="svg/minus-square.svg" height="20px" width="20px">
+					</td>
+					<td>
+						<img class="table-up" alt="Move this table row up." src="svg/arrow-up.svg" height="20px" width="20px">
+						<img class="table-down" alt="Move this table row down." src="svg/arrow-down.svg" height="20px" width="20px">
+					</td>
+				</tr>
+			</table>
+		</div>
+		<button id="export-btn"><img src="svg/pencil-square.svg" height="20px" width="20px"></button>
+		<button id="table-add" alt="Add a table row." ><img src="svg/plus-square.svg" height="20px" width="20px"></button>
+		<p id="export"></p>
+	</div>
+	<!-- selector usage -->
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script  src="js/index.js"></script>
+</body>
+
+</html>
