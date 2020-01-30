@@ -1,5 +1,5 @@
 <!-- ======================================================================= -->
-<project name="tox" default="main" basedir="./">
+<project name="tox" default="oracle" basedir="./">
 	<!-- =================================================================== -->
 	<!-- get enviroment from OS -->
 	<!-- =================================================================== -->
@@ -185,9 +185,16 @@
 		<echo message="load.test ----------------------------------"/>
 	</target>
 	<!-- =================================================================== -->
+	<!-- alternative -->
+	<!-- =================================================================== -->
+<!-- 
+	<target name="postgreql" depends="clean, compile.plpgsql.tox, load.war" description="postgreql">
+	</target>
+ -->
+	<!-- =================================================================== -->
 	<!-- default -->
 	<!-- =================================================================== -->
-	<target name="main" depends="clean, compile.plsql.tox, load.war" description="default">
+	<target name="oracle" depends="clean, compile.plsql.tox, load.war" description="oracle (default)">
 	</target>
 	<!-- =================================================================== -->
 </project>
