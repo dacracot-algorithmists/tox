@@ -21,7 +21,7 @@
 		<delete dir="tmp"/>
 		<delete dir="deploy"/>
 		<delete>
-			<fileset dir="./" includes="src/sql/*.sql.err"/>
+			<fileset dir="./" includes="src/sql/oracle/*.sql.err"/>
 			<fileset dir="./" includes="*.out"/>
 			<fileset dir="./" includes="*.err"/>
 			<fileset dir="./" includes="test*.html"/>
@@ -34,12 +34,12 @@
 	<target name="compile.plsql.tox" description="compile plsql for tox">
 		<echo message="compile.plsql.tox --------------------"/>
 		<mkdir dir="tmp/log"/>
-		<exec dir="src/sql" executable="sql" failonerror="true" output="src/sql/tox.all.sql.err">
+		<exec dir="src/sql/oracle" executable="sql" failonerror="true" output="src/sql/oracle/tox.all.sql.err">
 			<arg value="${db.login.tox}"/>
 			<arg value="@tox.all.sql"/>
 		</exec>
 		<echo message="looking for plsql errors -------------------"/>
-		<exec dir="src/sql" executable="grep" failonerror="false" resultproperty="found">
+		<exec dir="src/sql/oracle" executable="grep" failonerror="false" resultproperty="found">
 			<arg value="LINE/COL ERROR"/>
 			<arg value="tox.all.sql.err"/>
 		</exec>
@@ -49,11 +49,11 @@
 			</condition>
 		</fail>
 		<echo message="looking for line item errors ---------------"/>
-		<exec dir="src/sql" executable="grep" failonerror="false" resultproperty="found">
+		<exec dir="src/sql/oracle" executable="grep" failonerror="false" resultproperty="found">
 			<arg value="ERROR at"/>
 			<arg value="tox.all.sql.err"/>
 		</exec>
-		<fail message="sql compile errors">
+		<fail message="sql/oracle compile errors">
 			<condition>
 				<equals arg1="${found}" arg2="0"/>
 			</condition>
@@ -66,12 +66,12 @@
 	<target name="compile.plsql.example" description="compile plsql for example">
 		<echo message="compile.plsql.example ----------------"/>
 		<mkdir dir="tmp/log"/>
-		<exec dir="src/sql" executable="sql" failonerror="true" output="src/sql/test.all.sql.err">
+		<exec dir="src/sql/oracle" executable="sql" failonerror="true" output="src/sql/oracle/test.all.sql.err">
 			<arg value="${db.login.example}"/>
 			<arg value="@test.all.sql"/>
 		</exec>
 		<echo message="looking for plsql errors -------------------"/>
-		<exec dir="src/sql" executable="grep" failonerror="false" resultproperty="found">
+		<exec dir="src/sql/oracle" executable="grep" failonerror="false" resultproperty="found">
 			<arg value="LINE/COL ERROR"/>
 			<arg value="test.all.sql.err"/>
 		</exec>
@@ -81,11 +81,11 @@
 			</condition>
 		</fail>
 		<echo message="looking for line item errors ---------------"/>
-		<exec dir="src/sql" executable="grep" failonerror="false" resultproperty="found">
+		<exec dir="src/sql/oracle" executable="grep" failonerror="false" resultproperty="found">
 			<arg value="ERROR at"/>
 			<arg value="test.all.sql.err"/>
 		</exec>
-		<fail message="sql compile errors">
+		<fail message="sql/oracle compile errors">
 			<condition>
 				<equals arg1="${found}" arg2="0"/>
 			</condition>
